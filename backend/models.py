@@ -19,6 +19,7 @@ class Tasks(models.Model):
     description = models.CharField(db_column='description', max_length=255)
     deadline = models.DateTimeField(db_column='deadline')
     status = models.BooleanField(db_column='status', default=False)
+    address = models.CharField(db_column='address', max_length=255)
     longitude = models.FloatField(db_column='longitude')
     latitude = models.FloatField(db_column='latitude')
     addDateTime = models.DateTimeField(db_column='addDateTime', auto_now_add=True)
