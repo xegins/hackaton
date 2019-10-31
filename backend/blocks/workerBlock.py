@@ -4,6 +4,9 @@ from rest_framework import renderers
 
 
 def getWorkers(data):
-    worker = Workers.objects.filter(id=data['id'])
-    return HttpResponse(renderers.JSONRenderer().render(worker))
+    if (data['id'] == '*'):
+        worker = Workers.objects.all().values()
+    else:
+        worker = Workers.objects.filter(id=data['id'])
+    return HttpResponse(renderers.JSONRenderer().render(worker.values()))
 

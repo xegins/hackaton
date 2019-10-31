@@ -9,8 +9,7 @@ class Task(views.View):
         return taskBlock.createTask(data)
 
     def get(self, request):
-        data = request.GET
-        return taskBlock.getTasks(data)
+        return taskBlock.getTasks()
 
 
 class Worker(views.View):

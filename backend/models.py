@@ -14,7 +14,7 @@ class Workers(models.Model):
 
 class Tasks(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
-    id_worker = models.ForeignKey('Workers', models.DO_NOTHING, db_column='idWorker', null=False)
+    idWorker = models.ForeignKey('Workers', models.DO_NOTHING, db_column='idWorker', null=False)
     name = models.CharField(db_column='name', max_length=255)
     description = models.CharField(db_column='description', max_length=255)
     deadline = models.DateTimeField(db_column='deadline')

@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 def createTask(data):
-    task = Tasks(name=data['name'], id_worker=data['id_worker'], description=data['description'], deadline=data['deadline'],
+    task = Tasks(name=data['name'], idWorker=data['idWorker'], description=data['description'], deadline=data['deadline'],
                  longitude=data['longitude'], latitude=data['latitude'])
     try:
         task.save()
@@ -16,14 +16,12 @@ def createTask(data):
         return HttpResponse('Conflict', status=409)
 
 
-def getTasks(data):
-    tasks = Tasks.objects.filter(id=data['id'])
-    if data['idWorker']:
-        tasks = tasks.filter(idWorker=data['idWorker'])
+def getTasks():
+    tasks = Tasks.objects.all()
     for i in tasks:
         if i['deadline'] < datetime.now():
             Tasks.objects.filter(id=i['id']).update(status=True)
-    return HttpResponse(renderers.JSONRenderer().render(tasks))
+    return HttpResponse(renderers.JSONRenderer().render(tasks.values()))
 
 
 def getWorkersTasks(data):
