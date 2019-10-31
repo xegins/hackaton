@@ -1,16 +1,16 @@
 from django import views
 from rest_framework import parsers
-from backend.blocks import workerBlock
+from backend.blocks import workerBlock, taskBlock
 
 
 class Task(views.View):
     def post(self, request):
         data = parsers.JSONParser().parse(request)
-        print(data)
+        return taskBlock.createTask(data)
 
     def get(self, request):
         data = request.GET
-        print(data)
+        return taskBlock.getTasks(data)
 
 
 class Worker(views.View):

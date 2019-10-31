@@ -4,4 +4,5 @@ from backend import views
 
 urlpatterns = [
     path('task/', views.Task.as_view()),
+    path('worker/', views.Worker.as_view()),
 ]

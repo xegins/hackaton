@@ -1,3 +1,4 @@
+from django.core import exceptions
 from django.http import HttpResponse
 from rest_framework import renderers
 from backend.models import Tasks, Workers
@@ -15,11 +16,23 @@ def createTask(data):
         return HttpResponse('Conflict', status=409)
 
 
-def getTask(data):
-    task = Tasks.objects.filter(id=data['id'])
-    for i in task:
+def getTasks(data):
+    tasks = Tasks.objects.filter(id=data['id'])
+    if data['idWorker']:
+        tasks = tasks.filter(idWorker=data['idWorker'])
+    for i in tasks:
         if i['deadline'] < datetime.now():
-            task.filter(id=i['id']).update(status=True)
+            Tasks.objects.filter(id=i['id']).update(status=True)
+    return HttpResponse(renderers.JSONRenderer().render(tasks))
+
+
+def getWorkersTasks(data):
+    tasks = Tasks.objects.filter(idWorker=data['idWorker'])
+    for i in tasks:
+        if i['deadline'] < datetime.now():
+            Tasks.objects.filter(id=i['id']).update(status=True)
+    return HttpResponse(renderers.JSONRenderer().render(tasks))
+
 
 
 
