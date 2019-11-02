@@ -6,7 +6,7 @@ class Workers(models.Model):
     firstName = models.CharField(db_column='firstName', max_length=255)
     patronymic = models.CharField(db_column='patronymic', max_length=255)
     lastName = models.CharField(db_column='lastName', max_length=255)
-    phone = models.IntegerField(db_column='phone', unique=True, max_length=11)
+    phone = models.CharField(db_column='phone', unique=True, max_length=11)
 
     class Meta:
         db_table = 'Workers'
