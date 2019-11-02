@@ -16,7 +16,7 @@ def createTask(data):
         return HttpResponse('Conflict', status=409)
 
 
-def getTasks():
+def getTasks(data):
     tasks = Tasks.objects.all()
     for i in tasks:
         if i['deadline'] < datetime.now():
