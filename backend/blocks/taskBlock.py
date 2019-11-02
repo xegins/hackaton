@@ -8,7 +8,8 @@ from datetime import datetime
 
 def createTask(data):
     task = Tasks(name=data['name'], idWorker=data['idWorker'], description=data['description'], deadline=data['deadline'],
-                 longitude=data['longitude'], latitude=data['latitude'], address=data['address'])
+                 longitude=data['taskAddress']['coords'][0], latitude=data['taskAddress']['coords'][1],
+                 address=data['taskAddress']['address'])
     try:
         task.save()
         return HttpResponse(renderers.JSONRenderer().render({'success': 'Task was created!'}))
