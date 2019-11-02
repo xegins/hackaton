@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 def createTask(data):
-    task = Tasks(name=data['name'], idWorker=data['idWorker'], description=data['description'], deadline=data['deadline'],
+    task = Tasks(name=data['taskName'], idWorker=data['idWorker'], description=data['description'], deadline=data['deadline'],
                  longitude=data['taskAddress']['coords'][0], latitude=data['taskAddress']['coords'][1],
                  address=data['taskAddress']['address'])
     try:

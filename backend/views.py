@@ -6,7 +6,6 @@ from backend.blocks import workerBlock, taskBlock
 class Task(views.View):
     def post(self, request):
         data = parsers.JSONParser().parse(request)
-        print(data['taskAddress']['address'])
         return taskBlock.createTask(data)
 
     def get(self, request):
