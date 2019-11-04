@@ -29,3 +29,16 @@ class Tasks(models.Model):
         db_table = 'Tasks'
 
 
+class Files(models.Model):
+    """
+    database structure:
+    id - SERIAL field, not null, primary key
+    filename - char[255] or text field, not null
+    file - bitea field
+    """
+    id = models.AutoField(db_column='id', primary_key=True)
+    filename = models.CharField(db_column='filename', max_length=255, null=False)
+    file = models.BinaryField(db_column='file')
+
+    class Meta:
+        db_table = 'Files'
