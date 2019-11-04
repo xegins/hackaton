@@ -1,14 +1,18 @@
 from django.core import exceptions
 from django.http import HttpResponse
 from rest_framework import renderers
-from backend.models import Tasks, Workers
+from backend.models import Tasks
 from django import db
 from datetime import datetime
 
 
 def createTask(data):
-    task = Tasks(taskName=data['taskName'], idWorker_id=data['idWorker'], description=data['description'], deadline=data['deadline'],
-                 longitude=data['taskAddress']['coords'][0], latitude=data['taskAddress']['coords'][1],
+    task = Tasks(taskName=data['taskName'],
+                 idWorker_id=data['idWorker'],
+                 description=data['description'],
+                 deadline=data['deadline'],
+                 longitude=data['taskAddress']['coords'][0],
+                 latitude=data['taskAddress']['coords'][1],
                  address=data['taskAddress']['address'])
     try:
         task.save()
@@ -31,7 +35,3 @@ def getWorkersTasks(data):
         if i['deadline'] < datetime.now():
             Tasks.objects.filter(id=i['id']).update(status=True)
     return HttpResponse(renderers.JSONRenderer().render(tasks))
-
-
-
-
